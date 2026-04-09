@@ -58,7 +58,7 @@ docker run -d -p 8000:8000 --name filly-ai-container filly-fastapi-server
 
 이미지를 서버로 전송하면 AI가 분석한 **캡션**과 **분위기** 데이터를 반환합니다.
 
-- **URL**: `/analyze-core`
+- **URL**: `/blip-analyze`
 - **Method**: `POST`
 - **Content-Type**: `multipart/form-data`
 
