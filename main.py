@@ -17,27 +17,20 @@ async def blip_analyze(file: UploadFile = File(...)):
     image_data = await file.read()
     image = Image.open(io.BytesIO(image_data)).convert("RGB")
 
-    # 추출할 핵심 프롬프트 정의
-    core_prompts = {
-        "caption": "A picture of",
-        "mood": "The emotional mood of this photo is"
-    }
-    
-    analysis_results = {}
+    prompt = "A picture of"
 
     with torch.no_grad():
-        for key, prompt in core_prompts.items():
-            # 이미지와 각 프롬프트를 결합하여 전처리
-            inputs = processor(image, prompt, return_tensors="pt").to(device)
-            # 결과 생성
-            out = model.generate(**inputs, max_new_tokens=30)
-            # 디코딩 후 결과 저장
-            analysis_results[key] = processor.decode(out[0], skip_special_tokens=True)
+        # 이미지와 캡션 프롬프트를 결합하여 전처리
+        inputs = processor(image, prompt, return_tensors="pt").to(device)
+        # 결과 생성
+        out = model.generate(**inputs, max_new_tokens=30)
+        # 디코딩 후 결과 저장
+        caption = processor.decode(out[0], skip_special_tokens=True)
 
     # Spring Boot로 보낼 최종 데이터
     return {
         "status": "success",
-        "data": analysis_results # {"caption": "...", "mood": "..."}
+        "data": {"caption": caption}
     }
 
 if __name__ == "__main__":
