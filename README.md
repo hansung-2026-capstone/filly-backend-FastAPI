@@ -2,7 +2,7 @@
 
 # 🚀 Filly AI Analysis Server
 
-**BLIP (Bootstrapping Language-Image Pre-training)** 모델을 사용하여 이미지에서 객관적인 **상황(Caption)**과 감성적인 **분위기(Mood)**를 추출하는 AI 작업 서버입니다. 
+**BLIP (Bootstrapping Language-Image Pre-training)** 모델을 사용하여 이미지에서 객관적인 **상황(Caption)**을 추출하는 AI 작업 서버입니다. 
 <br/>
 Spring Boot 백엔드 서버와 협력하여 사용자의 사진을 분석하고, 일기 생성을 위한 핵심 메타데이터를 제공합니다.
 
@@ -56,7 +56,7 @@ docker run -d -p 8000:8000 --name filly-ai-container filly-fastapi-server
 
 ### **이미지 분석 (Core Analysis)**
 
-이미지를 서버로 전송하면 AI가 분석한 **캡션**과 **분위기** 데이터를 반환합니다.
+이미지를 서버로 전송하면 AI가 분석한 **캡션** 데이터를 반환합니다.
 
 - **URL**: `/blip-analyze`
 - **Method**: `POST`
@@ -72,8 +72,7 @@ docker run -d -p 8000:8000 --name filly-ai-container filly-fastapi-server
 {
   "status": "success",
   "data": {
-    "caption": "a person sitting at a cafe with a laptop",
-    "mood": "peaceful and focused"
+    "caption": "a person sitting at a cafe with a laptop"
   }
 }
 ```
